@@ -38,6 +38,7 @@ namespace API
 
             app.UseStaticFiles();
 
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
