@@ -63,26 +63,26 @@ namespace API.Controllers
 
         //Brands
         [HttpGet("brands")]
-        public async Task<IActionResult> GetProductBrands()
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
             return Ok(await _productBrandRepo.GetAllAsync());
         }
 
         [HttpGet("brands/{id}")]
-        public async Task<IActionResult> GetProductBrand(int id)
+        public async Task<ActionResult<ProductBrand>> GetProductBrand(int id)
         {
             return Ok(await _productBrandRepo.GetByIdAsync(id));
         }
 
         //Types
         [HttpGet("types")]
-        public async Task<IActionResult> GetProductTypes()
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
             return Ok(await _productTypeRepo.GetAllAsync());
         }
 
         [HttpGet("types/{id}")]
-        public async Task<IActionResult> GetProductType(int id)
+        public async Task<ActionResult<ProductType>> GetProductType(int id)
         {
             return Ok(await _productTypeRepo.GetByIdAsync(id));
         }
