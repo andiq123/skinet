@@ -2,7 +2,7 @@ import { ShopParams } from './../shared/models/shopParams';
 import { IProductType } from './../shared/models/productType';
 import { IBrand } from './../shared/models/brand';
 import { ShopService } from './shop.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/models/product';
 
 @Component({
@@ -11,6 +11,7 @@ import { IProduct } from '../shared/models/product';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  @ViewChild('search', { static: true }) search: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   productTypes: IProductType[];
@@ -33,7 +34,6 @@ export class ShopComponent implements OnInit {
   }
 
   loadProducts() {
-    this.products = [];
     this.shopService.getProducts(this.shopParams).subscribe(
       (data) => {
         this.totalCount = data.count;
@@ -63,15 +63,22 @@ export class ShopComponent implements OnInit {
     );
   }
 
+  onPageChanged(page: number) {
+    if (this.shopParams.pageNumber !== page) {
+      this.shopParams.pageNumber = page;
+      this.loadProducts();
+    }
+  }
+
   onBrandSelected(id: number) {
     this.shopParams.brandId = this.shopParams.brandId === id ? 0 : id;
-
+    this.shopParams.pageNumber = 1;
     this.loadProducts();
   }
 
   onTypeSelected(id: number) {
     this.shopParams.typeId = this.shopParams.typeId === id ? 0 : id;
-
+    this.shopParams.pageNumber = 1;
     this.loadProducts();
   }
 
@@ -80,9 +87,15 @@ export class ShopComponent implements OnInit {
     this.loadProducts();
   }
 
-  onPageChanged(event) {
-    const { page, itemsPerPage } = event;
-    this.shopParams.pageNumber = page;
+  onSearch() {
+    this.shopParams.search = this.search.nativeElement.value;
+    this.shopParams.pageNumber = 1;
+    this.loadProducts();
+  }
+
+  onReset() {
+    this.search.nativeElement.value = '';
+    this.shopParams = new ShopParams();
     this.loadProducts();
   }
 }

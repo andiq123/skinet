@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    SharedModule,
     ShopModule,
   ],
   providers: [],
