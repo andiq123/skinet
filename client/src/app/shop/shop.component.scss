@@ -1,0 +1,12 @@
+li {
+  cursor: pointer;
+  &:hover {
+    background: darken(white, 5%);
+  }
+}
+
+.active {
+  &:hover {
+    background: darken(#007bff, 5%);
+  }
+}
