@@ -1,12 +1,39 @@
-.cart-no{
-    position: absolute;
-    min-height: 25px;
-    min-width: 25px;
-    border-radius: 50px;
-    font-size: 1em;
-    background-color: rgb(167, 167, 236);
-    text-align: center;
-    color: white;
-    top:-12px;
-    right: 32px;
+div {
+  img {
+    cursor: pointer;
+    outline: none;
+    transition: all 250ms ease-in-out;
+    &:hover {
+      filter: blur(1px);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+  nav {
+    a {
+      text-decoration: none;
+      color: rgb(88, 80, 80);
+      &.active {
+        color: rgb(175, 138, 68);
+      }
+    }
+  }
+
+  div {
+    a {
+      .cart-no {
+        position: absolute;
+        min-height: 25px;
+        min-width: 25px;
+        border-radius: 50px;
+        font-size: 1em;
+        background-color: rgb(167, 167, 236);
+        text-align: center;
+        color: white;
+        top: -12px;
+        right: 32px;
+      }
+    }
+  }
 }
