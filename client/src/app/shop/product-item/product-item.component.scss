@@ -1,13 +1,56 @@
+$animation-duration: 300ms;
+
 .card {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 1px 1px 8px 0px rgb(199, 192, 192) !important;
 
-  .card-body {
-    .btn-group {
+  .image {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      outline: none;
+      object-fit: cover;
+      transition: filter $animation-duration ease-in-out;
+    }
+
+    .hover-overlay {
+      position: absolute;
       width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      background-color: rgba(240, 228, 228, 0.199);
+      transition: opacity $animation-duration ease-in-out;
+
       button {
-        width: 50%;
+        width: 30%;
+        height: 40px;
+        transition: transform $animation-duration ease-in-out;
+      }
+
+      button:first-of-type {
+        transform: translate(-20px);
+      }
+
+      button:nth-child(2) {
+        transform: translate(20px);
+      }
+    }
+
+    &:hover {
+      & .hover-overlay {
+        opacity: 1;
+        & button {
+          transform: none;
+        }
+      }
+
+      & img {
+        filter: blur(3px);
       }
     }
   }
