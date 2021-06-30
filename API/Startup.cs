@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -21,6 +22,11 @@ namespace API
             services.AddControllers();
             services.AddApplicationServices(_configuration);
             services.AddSwaggerDocumentation();
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+           {
+               var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+               return ConnectionMultiplexer.Connect(configuration);
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
