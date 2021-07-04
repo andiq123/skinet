@@ -18,6 +18,18 @@ const routes: Routes = [
     data: { breadcrumb: 'Shop' },
   },
   {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then((mod) => mod.BasketModule),
+    data: { breadcrumb: 'Basket' },
+  },
+
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
+  },
+  {
     path: 'test-error',
     component: TestErrorComponent,
     data: { breadcrumb: 'Test Errors' },
