@@ -21,6 +21,8 @@ namespace API
         {
             services.AddControllers();
             services.AddApplicationServices(_configuration);
+            services.AddIdentityServices(_configuration);
+
             services.AddSwaggerDocumentation();
             services.AddSingleton<IConnectionMultiplexer>(c =>
            {
@@ -45,6 +47,8 @@ namespace API
             app.UseStaticFiles();
 
             app.UseCors();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
