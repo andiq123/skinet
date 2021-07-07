@@ -3,6 +3,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TestErrorComponent } from './core/test-error/test-error.component';
+import { AuthGuard } from './core/_guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +29,14 @@ const routes: Routes = [
     path: 'checkout',
     loadChildren: () =>
       import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
+    data: { breadcrumb: 'Checkout' },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'account',
+    loadChildren: () =>
+      import('./account/account.module').then((mod) => mod.AccountModule),
+    data: { breadcrumb: { skip: true } },
   },
   {
     path: 'test-error',

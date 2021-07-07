@@ -32,7 +32,8 @@ namespace API.Controllers
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
             var user = await _userManager.FindByEmailAsync(email);
-            return Ok(new UserDto { Email = user.Email, DisplayName = user.DisplayName });
+            var token = await Task.Run(() => _tokenService.CreateToken(user));
+            return Ok(new UserDto { Email = user.Email, DisplayName = user.DisplayName, Token = token });
         }
 
         [HttpGet("emailexists")]
